@@ -11,6 +11,7 @@ PROFILE_CHOICES = (
 )
 
 class User(AbstractUser):
+    
     user_type = models.IntegerField(choices=PROFILE_CHOICES)
     
     def __str__(self):
