@@ -5,3 +5,5 @@ class EmpanelmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empanelment
         fields = '__all__'
+
+    

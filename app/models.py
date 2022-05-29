@@ -5,10 +5,10 @@ from djongo import models
 # Create your models here.
 
 STATUS_CHOICES = (
-    (1, 'contacted'),
-    (2,'inprocess'),
-    (3,'verified'),
-    (4,'refused'),
+    ('contacted','contacted'),
+    ('inprocess','inprocess'),
+    ('verified','verified'),
+    ('refused','refused'),
 )
 
 class Empanelment(models.Model):
@@ -18,6 +18,6 @@ class Empanelment(models.Model):
     company = models.CharField(max_length=200)
     designation = models.CharField(max_length=200)
     reference_id = models.CharField(max_length=500)
-    status = models.IntegerField(default=2,choices=STATUS_CHOICES)
+    status = models.CharField(max_length=20, default="contacted",choices=STATUS_CHOICES)
 
     
