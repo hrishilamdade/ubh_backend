@@ -96,7 +96,7 @@ class EmpanelmentToMetaView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
 
         data = request.data
-        empanelment_id = data['empanelment_id']
+        empanelment_id = data.get("empanelment_id")
 
         try:
             empanelment = Empanelment.objects.get(id=empanelment_id)
@@ -107,6 +107,7 @@ class EmpanelmentToMetaView(generics.GenericAPIView):
         
         empanelment = dict(serializer.data)
         del empanelment["status"]
+        del empanelment["comments"]
         meta_expert_obj =  MetaExpert.objects.create(**empanelment)
         
         meta_expert_obj = MetaExpertSerializer(meta_expert_obj).data
