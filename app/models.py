@@ -10,6 +10,7 @@ STATUS_CHOICES = (
 )
 
 class Empanelment(models.Model):
+    title = models.CharField(max_length=5,default="")
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50,default="")
     last_name = models.CharField(max_length=50,default="")
@@ -24,6 +25,7 @@ class Empanelment(models.Model):
 
     
 class MetaExpert(models.Model):
+    title = models.CharField(max_length=5,default="")
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50,default="")
     last_name = models.CharField(max_length=50,default="")    

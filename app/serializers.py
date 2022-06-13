@@ -15,7 +15,9 @@ class MetaExpertSerializer(serializers.ModelSerializer):
     class Meta:
         model = MetaExpert
         fields = [
-            "name",
+            "first_name",
+            "middle_name",
+            "last_name",
             "email",
             "phone",
             "company",
