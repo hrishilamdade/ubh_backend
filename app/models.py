@@ -12,7 +12,7 @@ STATUS_CHOICES = (
 class Empanelment(models.Model):
     title = models.CharField(max_length=5,default="")
     first_name = models.CharField(max_length=50)
-    middle_name = models.CharField(max_length=50,default="")
+    middle_name = models.CharField(max_length=50,default="",blank=True,null=True)
     last_name = models.CharField(max_length=50,default="")
     email = models.EmailField(max_length=50,unique=True,null=True,blank=True)
     phone = models.CharField(max_length=50,null=True,blank=True)
@@ -27,7 +27,7 @@ class Empanelment(models.Model):
 class MetaExpert(models.Model):
     title = models.CharField(max_length=5,default="")
     first_name = models.CharField(max_length=50)
-    middle_name = models.CharField(max_length=50,default="")
+    middle_name = models.CharField(max_length=50,default="",blank=True,null=True)
     last_name = models.CharField(max_length=50,default="")    
     email = models.EmailField(max_length=50)
     phone = models.CharField(max_length=50)
