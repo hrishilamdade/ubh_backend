@@ -6,6 +6,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
+
 class EmpanelmentView(generics.GenericAPIView):
     serializer_class = EmpanelmentSerializer
     queryset = Empanelment.objects.all()

@@ -12,7 +12,7 @@ PROFILE_CHOICES = (
 
 class User(AbstractUser):
     
-    user_type = models.IntegerField(choices=PROFILE_CHOICES)
+    user_type = models.IntegerField(choices = PROFILE_CHOICES)
     
     def __str__(self):
         return self.username

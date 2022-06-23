@@ -19,8 +19,8 @@ class Empanelment(models.Model):
     company = models.CharField(max_length=200)
     designation = models.CharField(max_length=200)
     reference_id = models.CharField(max_length=500)
-    project_topic = models.CharField(max_length=200,default="Project Topic")
-    comments = models.JSONField(default=[],null=True, blank=True)
+    project_topic = models.CharField(max_length=200,default="project topic")
+    comments = models.TextField(default="",null=True, blank=True)
     status = models.CharField(max_length=20, default="contacted",choices=STATUS_CHOICES)
 
     
@@ -34,7 +34,7 @@ class MetaExpert(models.Model):
     company = models.CharField(max_length=200)
     designation = models.CharField(max_length=200)
     reference_id = models.CharField(max_length=500)
-    project_topic = models.CharField(max_length=200,default="Project Topic")
+    project_topic = models.CharField(max_length=200,default="project topic")
     biography = models.TextField(null=True,blank=True)
     price = models.IntegerField(null=True,blank=True)
     geography = models.CharField(max_length=200,null=True,blank=True)

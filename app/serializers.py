@@ -1,4 +1,5 @@
 import json
+from this import d
 from rest_framework import serializers
 from .models import *
 
@@ -6,6 +7,14 @@ class EmpanelmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empanelment
         fields = '__all__'
+
+    def validate(self,data):
+        for key in data:
+            try:
+                data[key] = data[key].lower()
+            except:
+                print("Cannot convert to string")
+        return data
 
     
 class MetaExpertSerializer(serializers.ModelSerializer):
@@ -15,6 +24,7 @@ class MetaExpertSerializer(serializers.ModelSerializer):
     class Meta:
         model = MetaExpert
         fields = [
+            "id",
             "first_name",
             "middle_name",
             "last_name",

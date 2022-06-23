@@ -5,7 +5,7 @@ from .serializers import *
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.generics import RetrieveAPIView, CreateAPIView,RetrieveUpdateAPIView
+from rest_framework.generics import CreateAPIView,GenericAPIView
 from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode  
@@ -16,6 +16,8 @@ from django.core.files import File as FileClass
 # from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
+
+
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -59,3 +61,15 @@ class UserRegistrationView(CreateAPIView):
             return Response(response, status=status_code)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetUserInfo(GenericAPIView):
+    serializer_class = UserSerialzer
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (JWTTokenUserAuthentication,)
+
+    def get(self,request):
+        user_info = User.objects.get(id = self.request.user.id)
+        user_info_data = self.serializer_class(user_info)
+        return Response(user_info_data.data,status=status.HTTP_200_OK)
