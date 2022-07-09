@@ -50,10 +50,19 @@ class MetaExpertView(generics.GenericAPIView):
 
     permission_classes = [AllowAny]
 
-    def get(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
+    def get(self, request,id=None, *args, **kwargs):
+        if id:
+            try:
+                meta_obj = MetaExpert.objects.get(id=id)
+            except MetaExpert.DoesNotExist:
+                return Response({"message":"Meta Expert with this id not found"},status=status.HTTP_404_NOT_FOUND)
+            data = self.serializer_class(meta_obj).data
+
+            return Response(data,status=status.HTTP_200_OK)
+        else:   
+            queryset = self.get_queryset()
+            serializer = self.serializer_class(queryset, many=True)
+            return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
         data = request.data
@@ -78,7 +87,7 @@ class MetaExpertView(generics.GenericAPIView):
         serializer = self.serializer_class(metaexpert,data=data,partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

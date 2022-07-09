@@ -20,7 +20,9 @@ class EmpanelmentSerializer(serializers.ModelSerializer):
 class MetaExpertSerializer(serializers.ModelSerializer):
 
     skills = serializers.JSONField()
-    
+    education = serializers.JSONField()
+    experience = serializers.JSONField()
+
     class Meta:
         model = MetaExpert
         fields = [
@@ -33,13 +35,26 @@ class MetaExpertSerializer(serializers.ModelSerializer):
             "company",
             "designation",
             "reference_id",
-            "biography",
+            "education",
+            "experience",
             "price",
             "geography",
             "skills"
         ]
 
-        
+    
+    def get_education(self,obj):
+        education = obj.education
+        if education:
+            return json.loads(education)
+        return []
+    
+    def get_experience(self,obj):
+        experience = obj.experience
+        if experience:
+            return json.loads(experience)
+        return []
+    
     def get_skills(self,obj):
         skills = obj.skills
         if skills:
